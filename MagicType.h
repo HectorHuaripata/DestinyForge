@@ -1,0 +1,3 @@
+#pragma once
+
+enum MagicType{DARK, DEATH, ELECTRICITY, FIRE, GROUND, ICE, LIFE, LIGHT, METAL, WATER, WIND};
