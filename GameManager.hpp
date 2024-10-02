@@ -19,12 +19,12 @@ enum class GameState { START, WORLD_MAP, DUNGEON, BATTLE, DIALOGUE, SHOP };
 class GameManager {
 private:
     Menu* cMenu;
-    BattleManager bManager;
+    BattleManager* bManager;
     GameState gState;
     Entity* cEntityInTurn;
 
     GameManager() : cEntityInTurn(nullptr), cMenu(nullptr), gState(GameState::START) { 
-        bManager = BattleManager();
+        bManager = new BattleManager;
     }
     ~GameManager(){}
 public:
@@ -46,8 +46,6 @@ public:
     void StartMap();
     void ExecuteTurn();
     void ChangeGameState(GameState gameState);
-
-    void DefineTurns();
 
     GameState   getGameState() const { return gState; }
     Menu*       getCMenu() { return cMenu; }

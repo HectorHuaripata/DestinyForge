@@ -153,7 +153,7 @@ void GameManager::ChangeGameState(GameState gameState) {
 
     case GameState::BATTLE:
         cMenu = new BattleMenu;
-        bManager.StartBattle();
+        bManager->StartBattle();
         break;
 
     case GameState::DUNGEON:
@@ -165,42 +165,5 @@ void GameManager::ChangeGameState(GameState gameState) {
 
     default:
         break;
-    }
-    
-}
-
-void GameManager::DefineTurns()
-{
-    //TODO: El orden de los turnos de los heroes ya deberia estar definido al iniciar el programa y solo se
-    // actualizaria cuando se agrega o elimina un heroe. Asi, cada que inicia una batalla, solo se agregaria
-    // el orden de los enemigos; Y eliminarlos del arreglo despues de terminar la batalla.
-    for (Entity* var : group)
-    {
-        for (int i = 0; i < MAX_TEAM_MEMBERS; i++)
-        {
-            if (ordenTurnos.size() == i) {
-                ordenTurnos.push_back(var);
-                break;
-            }
-            else if (ordenTurnos[i]->getSpeed() > var->getSpeed()) {
-                ordenTurnos.insert(ordenTurnos.begin() + i, var);
-                break;
-            }
-        }
-    }
-
-    for (Entity* var : enemies)
-    {
-        for (int i = 0; i < MAX_TEAM_MEMBERS * 2; i++)
-        {
-            if (ordenTurnos.size() == i) {
-                ordenTurnos.push_back(var);
-                break;
-            }
-            else if (ordenTurnos[i]->getSpeed() > var->getSpeed()) {
-                ordenTurnos.insert(ordenTurnos.begin() + i, var);
-                break;
-            }
-        }
-    }
+    }    
 }

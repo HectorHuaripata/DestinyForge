@@ -1,8 +1,8 @@
 #include "Entity.hpp"
 
-Entity::Entity(tagEntity tag = tagEntity::ENEMY, std::string name = "Desconocido", int mHealth = 0, int pAtk = 0, int pDef = 0, int mAtk = 0, int mDef = 0, int speed = 0, int mana = 0) : tag(tag), name(name), mHealth(mHealth), cHealth(mHealth), pAtk(pAtk), pDef(pDef), mAtk(mAtk), mDef(mDef), speed(speed), mana(mana) {}
+Entity::Entity(tagEntity tag = tagEntity::ENEMY, std::string name = "Desconocido", int mHealth = 0, int pAtk = 0, int pDef = 0, int mAtk = 0, int mDef = 0, int speed = 0, int mMana = 0) : tag(tag), name(name), mHealth(mHealth), cHealth(mHealth), pAtk(pAtk), pDef(pDef), mAtk(mAtk), mDef(mDef), speed(speed), cMana(mMana), mMana(mMana) {}
 
-Entity::Entity(tagEntity tag = tagEntity::ENEMY, std::string name = "Desconocido", int mHealth = 0, int pAtk = 0, int pDef = 0, int mAtk = 0, int mDef = 0, int speed = 0, int mana = 0, Attack* a1 = nullptr, Attack* a2 = nullptr, Attack* a3 = nullptr, Attack* a4 = nullptr) : tag(tag), name(name), mHealth(mHealth), cHealth(mHealth), pAtk(pAtk), pDef(pDef), mAtk(mAtk), mDef(mDef), speed(speed), mana(mana) {
+Entity::Entity(tagEntity tag = tagEntity::ENEMY, std::string name = "Desconocido", int mHealth = 0, int pAtk = 0, int pDef = 0, int mAtk = 0, int mDef = 0, int speed = 0, int mMana = 0, Attack* a1 = nullptr, Attack* a2 = nullptr, Attack* a3 = nullptr, Attack* a4 = nullptr) : tag(tag), name(name), mHealth(mHealth), cHealth(mHealth), pAtk(pAtk), pDef(pDef), mAtk(mAtk), mDef(mDef), speed(speed), cMana(mMana),mMana(mMana) {
 
     if (a1 != nullptr) attack.push_back(a1);
     if (a2 != nullptr) attack.push_back(a2);
@@ -22,7 +22,7 @@ void Entity::receiveDamage(int damage) {
     cHealth = std::clamp(cHealth - damage, 0, cHealth);
 }
 
-void Entity::doAttack(int attackPos, Entity* objective)
+void Entity::doAttack(int attackPos, std::vector<Entity*> objective)
 {
     attack[attackPos]->Execute(this, objective);
 }

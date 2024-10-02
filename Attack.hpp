@@ -15,29 +15,29 @@ enum class TargetObjective {SELF, ALLY, RIVAL};
 
 class Attack {
 private:
-    std::string name;
+    /*std::string name;
     AttackType type;
     TargetRange range;
     TargetObjective objetive;
     int power;
     int accuracy;
-    int priority;
+    int priority;*/
     // ... otros atributos para efectos secundarios, condiciones especiales, etc.
 public:
 
-    Attack(const std::string& nombre, AttackType tipo, TargetRange alcance, TargetObjective objetivo, int potencia, int precision, int prioridad);
+    //Attack(const std::string& nombre, AttackType tipo, TargetRange alcance, TargetObjective objetivo, int potencia, int precision, int prioridad);
 
     // ... otros métodos (ejecutar, calcularDaño, aplicarEfectos, etc.)
-    void Execute(Entity* source, std::vector<Entity*> objective); //Ejecuta el ataque en general, usando las otras funciones
-    void CalculateDamage(Entity* source, Entity* objective);
-    void ApplyEffects(std::vector<Entity*> objective); //Aplica efectos como veneno, inmunidad, etc
-    bool isCritic(); //Decide si el ataque es critico
-    bool itFails(); //Cuando un ataque tiene probabilidades de fallar
+    virtual void Execute(Entity* source, std::vector<Entity*> objective) = 0; //Ejecuta el ataque en general, usando las otras funciones
+    //void CalculateDamage(Entity* source, Entity* objective);
+    //void ApplyEffects(std::vector<Entity*> objective); //Aplica efectos como veneno, inmunidad, etc
+    //bool isCritic(); //Decide si el ataque es critico
+    //bool itFails(); //Cuando un ataque tiene probabilidades de fallar
 
 
 
-    AttackType GetType();
-    TargetRange getTargetType();
-    TargetObjective getTargetSide();
-    std::string getName();
+    /*AttackType GetType() { return type; }
+    TargetRange getTargetType() { return range; }
+    TargetObjective getTargetSide() { return objetive; }
+    std::string getName() { return name; }*/
 };

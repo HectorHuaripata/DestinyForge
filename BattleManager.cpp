@@ -34,38 +34,15 @@ void BattleManager::ExecuteTurn()
 
     //if(cCharacter->getTag() == tagEntity::HERO && sAttack > -1 && sAttack < attacks.size())
     if (cEntityInTurn->getTag() == tagEntity::HERO) {
-        if (false)
-        {
-
-        }
-        cEntityInTurn->doAttack(sAttack, enemies[(cTurn / 4) % 2]);
+        cEntityInTurn->doAttack(sAttack, enemies);
     }
     else if (cEntityInTurn->getTag() == tagEntity::ENEMY) {
-        cEntityInTurn->doAttack(sAttack, group[(cTurn / 4) % 2]);
+        cEntityInTurn->doAttack(sAttack, group);
     }
 
     bState = BattleState::ACTION;
     cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
     cTurn++;
-
-    //// Ejecutar acción seleccionada
-//sAttack = cMenu->MainMenuPressed();
-
-////if(cCharacter->getTag() == tagEntity::HERO && sAttack > -1 && sAttack < attacks.size())
-//if (cEntityInTurn->getTag() == tagEntity::HERO) {
-//    if (false)
-//    {
-
-//    }
-//    cEntityInTurn->doAttack(sAttack, enemies[(cTurn / 4) % 2]);
-//}
-//else if (cEntityInTurn->getTag() == tagEntity::ENEMY) {
-//    cEntityInTurn->doAttack(sAttack, group[(cTurn / 4) % 2]);
-//}
-
-//bState = BattleState::ACTION;
-//cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
-//cTurn++;
 }
 
 void BattleManager::ChangeBattleState(BattleState battleState)
@@ -131,7 +108,7 @@ void BattleManager::Action(int attackID, int objective = 0, bool toRival = true)
     //TODO: Implementar un validador para que la id del ataque y el indice del objetivo sean validos
     
 
-    if (cEntityInTurn->getAttack(attackID)->getTargetType() == TargetRange::SINGLE )
+   /* if (cEntityInTurn->getAttack(attackID)->getTargetType() == TargetRange::SINGLE )
     {
         cEntityInTurn->doAttack(attackID, cEntityInTurn->getTag() == tagEntity::HERO ? enemies[objective] : group[objective]);
     }
@@ -145,5 +122,6 @@ void BattleManager::Action(int attackID, int objective = 0, bool toRival = true)
     }
     else if (cEntityInTurn->getTag() == tagEntity::ENEMY) {
         cEntityInTurn->doAttack(sAttack, group[(cTurn / 4) % 2]);
-    }
+    }*/
+
 }
