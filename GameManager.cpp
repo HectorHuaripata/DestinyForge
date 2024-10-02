@@ -5,16 +5,6 @@ void GameManager::Initialize(sf::RenderWindow& rwindow)
 {
     cMenu = new MainMenu();
     rwindow.setFramerateLimit(60);
-
-    attacks.push_back(new AttackDamage("Ataque fisico", 8, 5, AttackType::PHYSICAL, TargetType::SINGLE));
-    attacks.push_back(new AttackDamage("Ataque magico", 10, 7, AttackType::MAGIC, TargetType::SINGLE));
-    attacks.push_back(new AttackDamage("Tormenta", 12, 10, AttackType::MAGIC, TargetType::MULTI));
-
-    group.push_back(new Entity(tagEntity::HERO, "Hector", 50, 8, 6, 4, 4, 10, 20, attacks[0], attacks[1], nullptr, nullptr));
-    group.push_back(new Entity(tagEntity::HERO, "Miguel", 60, 10, 4, 4, 6, 8, 12, attacks[0], attacks[1], attacks[2], nullptr));
-
-    enemies.push_back(new Entity(tagEntity::ENEMY, "Liche", 60, 7, 5, 6, 6, 8, 18, attacks[0], attacks[1], nullptr, nullptr));
-    enemies.push_back(new Entity(tagEntity::ENEMY, "Huargo", 40, 7, 5, 3, 3, 8, 18, attacks[0], attacks[1], attacks[2], nullptr));
 }
 
 void GameManager::Update(sf::RenderWindow& rwindow, sf::Event& ev)
@@ -142,16 +132,6 @@ void GameManager::Quit()
 {
 }
 
-void GameManager::StartBattle()
-{
-    bState = BattleState::ACTION;
-    //TODO: Inicializar el orden de los turnos
-    DefineTurns();
-    //TODO: Implementar algoritmo para ordenar los elementos segun su velocidad
-    cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
-    cTurn = 0;
-}
-
 void GameManager::StartMap()
 {
 
@@ -159,24 +139,7 @@ void GameManager::StartMap()
 
 void GameManager::ExecuteTurn()
 {
-    // Ejecutar acción seleccionada
-    sAttack = cMenu->MainMenuPressed();
 
-    //if(cCharacter->getTag() == tagEntity::HERO && sAttack > -1 && sAttack < attacks.size())
-    if (cEntityInTurn->getTag() == tagEntity::HERO) {
-        if (false)
-        {
-
-        }
-        cEntityInTurn->doAttack(sAttack, enemies[(cTurn / 4) % 2]);
-    }
-    else if (cEntityInTurn->getTag() == tagEntity::ENEMY) {
-        cEntityInTurn->doAttack(sAttack, group[(cTurn / 4) % 2]);
-    }
-
-    bState = BattleState::ACTION;
-    cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
-    cTurn++;
 }
 
 void GameManager::ChangeGameState(GameState gameState) {
@@ -190,7 +153,7 @@ void GameManager::ChangeGameState(GameState gameState) {
 
     case GameState::BATTLE:
         cMenu = new BattleMenu;
-        StartBattle();
+        bManager.StartBattle();
         break;
 
     case GameState::DUNGEON:
@@ -204,11 +167,6 @@ void GameManager::ChangeGameState(GameState gameState) {
         break;
     }
     
-}
-
-void GameManager::ChangeBattleState(BattleState battleState)
-{
-    bState = battleState;
 }
 
 void GameManager::DefineTurns()

@@ -10,14 +10,14 @@ private:
     int power, baseDamage;
     AttackType type;
     TargetRange range;
-    TargetSide objectiveTeam;
+    TargetObjective objectiveTeam;
     std::string name;
 public:
-    AttackDamage(std::string name, int power, int baseDamage, AttackType attackType, TargetRange range, TargetSide objTeam);
+    AttackDamage(std::string name, int power, int baseDamage, AttackType attackType, TargetRange range, TargetObjective objTeam);
     ~AttackDamage();
     void        Execute(Entity* source, std::vector<Entity*> objective);
     AttackType  GetType() { return type; }
     TargetRange getTargetType() { return range; }
-    TargetSide  getTargetSide() { return objectiveTeam; }
+    TargetObjective  getTargetSide() { return objectiveTeam; }
     std::string getName() { return name; }
 };

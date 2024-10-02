@@ -18,17 +18,14 @@ enum class GameState { START, WORLD_MAP, DUNGEON, BATTLE, DIALOGUE, SHOP };
 
 class GameManager {
 private:
-    std::vector<Entity*> group;
-    std::vector<Entity*> enemies;
-    std::vector<Attack*> attacks;
-    std::vector<Entity*> ordenTurnos;
     Menu* cMenu;
-    int cTurn, sAttack;
+    BattleManager bManager;
     GameState gState;
     Entity* cEntityInTurn;
-    BattleState bState;
 
-    GameManager() :cTurn(-1), sAttack(0), cEntityInTurn(nullptr), cMenu(nullptr), gState(GameState::START), bState(BattleState::ACTION) { }
+    GameManager() : cEntityInTurn(nullptr), cMenu(nullptr), gState(GameState::START) { 
+        bManager = BattleManager();
+    }
     ~GameManager(){}
 public:
 
@@ -46,39 +43,13 @@ public:
     
 
     //Cambios de Estado
-    void StartBattle();
     void StartMap();
     void ExecuteTurn();
     void ChangeGameState(GameState gameState);
-    void ChangeBattleState(BattleState battleState);
 
     void DefineTurns();
 
-    Entity*     getPlayer(int id) {
-        if (id < 0 || id >= group.size())
-        {
-            std::cerr << "Index out of bounds.\n";
-            return nullptr;
-        }
-
-        return group[id];
-    }
-    Entity*     getEnemy(int id) {
-        if (id < 0 || id >= enemies.size())
-        {
-            std::cerr << "Index out of bounds.\n";
-            return nullptr;
-        }
-
-        return group[id];
-    }
-
-    size_t      getGroupSize() { return group.size(); }
-    size_t      getEnemiesSize() { return enemies.size(); }
-    int         getTurn() { return cTurn; }
-    Entity*     getcCharacter() { return cEntityInTurn; }
     GameState   getGameState() const { return gState; }
-    BattleState getBattleState() const { return bState; }
     Menu*       getCMenu() { return cMenu; }
     
     

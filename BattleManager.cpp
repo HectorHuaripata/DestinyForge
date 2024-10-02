@@ -47,11 +47,30 @@ void BattleManager::ExecuteTurn()
     bState = BattleState::ACTION;
     cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
     cTurn++;
+
+    //// Ejecutar acción seleccionada
+//sAttack = cMenu->MainMenuPressed();
+
+////if(cCharacter->getTag() == tagEntity::HERO && sAttack > -1 && sAttack < attacks.size())
+//if (cEntityInTurn->getTag() == tagEntity::HERO) {
+//    if (false)
+//    {
+
+//    }
+//    cEntityInTurn->doAttack(sAttack, enemies[(cTurn / 4) % 2]);
+//}
+//else if (cEntityInTurn->getTag() == tagEntity::ENEMY) {
+//    cEntityInTurn->doAttack(sAttack, group[(cTurn / 4) % 2]);
+//}
+
+//bState = BattleState::ACTION;
+//cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
+//cTurn++;
 }
 
 void BattleManager::ChangeBattleState(BattleState battleState)
 {
-
+    bState = battleState;
 }
 
 void BattleManager::StartBattle()
