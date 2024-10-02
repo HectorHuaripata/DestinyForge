@@ -1,6 +1,7 @@
 #pragma once
 #include "AttackDamage.hpp"
 #include "BattleMenu.hpp"
+#include "BattleManager.hpp"
 #include "InGameMenu.h"
 
 #include <vector>

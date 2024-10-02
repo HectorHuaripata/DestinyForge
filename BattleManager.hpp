@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "GameManager.hpp"
+#include "MainMenu.h"
 
     //TODO: IMPLEMENTAR CLASE BATTLE MANAGER
 

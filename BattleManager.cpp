@@ -112,9 +112,9 @@ void BattleManager::Action(int attackID, int objective = 0, bool toRival = true)
     //TODO: Implementar un validador para que la id del ataque y el indice del objetivo sean validos
     
 
-    if (cEntityInTurn->getAttack(attackID)->getTargetType() == TargetType::SINGLE)
+    if (cEntityInTurn->getAttack(attackID)->getTargetType() == TargetRange::SINGLE )
     {
-        cEntityInTurn->doAttack(attackID, )
+        cEntityInTurn->doAttack(attackID, cEntityInTurn->getTag() == tagEntity::HERO ? enemies[objective] : group[objective]);
     }
 
     if (cEntityInTurn->getTag() == tagEntity::HERO) {
