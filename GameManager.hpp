@@ -4,13 +4,9 @@
 #include "BattleManager.hpp"
 #include "InGameMenu.h"
 
-#include <vector>
-
-class MainMenu;
-
-enum class BattleState { ACTION, MAGIC, INVENTORY, SELECT_TARGET };
-
 enum class GameState { START, WORLD_MAP, DUNGEON, BATTLE, DIALOGUE, SHOP };
+
+enum class BattleState;
 
 #define MAX_TEAM_MEMBERS 5
 
@@ -21,11 +17,8 @@ private:
     Menu* cMenu;
     BattleManager* bManager;
     GameState gState;
-    Entity* cEntityInTurn;
 
-    GameManager() : cEntityInTurn(nullptr), cMenu(nullptr), gState(GameState::START) { 
-        bManager = new BattleManager;
-    }
+    GameManager() : cMenu(nullptr), gState(GameState::START), bManager(nullptr) {}
     ~GameManager(){}
 public:
 
@@ -44,11 +37,13 @@ public:
 
     //Cambios de Estado
     void StartMap();
-    void ExecuteTurn();
     void ChangeGameState(GameState gameState);
+    void ChangeBattleState(BattleState battleState);
 
-    GameState   getGameState() const { return gState; }
-    Menu*       getCMenu() { return cMenu; }
+    inline const GameState& getGameState() const { return gState; }
+    BattleState getBattleState() { return this->bManager->getBattleState(); }
+    Menu*       getCMenu() { return this->cMenu; }
+    inline Entity* getCCharacter() const { return this->bManager->getcCharacter(); }
     
     
     

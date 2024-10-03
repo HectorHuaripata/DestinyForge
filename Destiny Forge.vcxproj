@@ -142,7 +142,6 @@
     <ClCompile Include="AttackDamage.cpp" />
     <ClCompile Include="BattleManager.cpp" />
     <ClCompile Include="BattleMenu.cpp" />
-    <ClCompile Include="Component.cpp" />
     <ClCompile Include="ComponentsEffect.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GameManager.cpp" />

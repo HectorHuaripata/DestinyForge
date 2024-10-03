@@ -3,6 +3,7 @@
 
 void GameManager::Initialize(sf::RenderWindow& rwindow)
 {
+    bManager = new BattleManager();
     cMenu = new MainMenu();
     rwindow.setFramerateLimit(60);
 }
@@ -137,20 +138,11 @@ void GameManager::StartMap()
 
 }
 
-void GameManager::ExecuteTurn()
-{
-
-}
-
 void GameManager::ChangeGameState(GameState gameState) {
     delete(cMenu);
     gState = gameState;
     switch (gState)
     {
-    case GameState::START:
-        cMenu = new MainMenu();
-        break;
-
     case GameState::BATTLE:
         cMenu = new BattleMenu;
         bManager->StartBattle();
@@ -166,4 +158,9 @@ void GameManager::ChangeGameState(GameState gameState) {
     default:
         break;
     }    
+}
+
+void GameManager::ChangeBattleState(BattleState battleState)
+{
+    bManager->ChangeBattleState(battleState);
 }

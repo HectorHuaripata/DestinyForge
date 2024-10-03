@@ -16,8 +16,8 @@ public:
     AttackDamage(std::string name, int power, int baseDamage, AttackType attackType, TargetRange range, TargetObjective objTeam);
     ~AttackDamage();
     void        Execute(Entity* source, std::vector<Entity*> objective);
-    AttackType  GetType() { return type; }
+    inline const AttackType& GetType() const { return this->type; }
     TargetRange getTargetType() { return range; }
     TargetObjective  getTargetSide() { return objectiveTeam; }
-    std::string getName() { return name; }
+    inline const std::string& getName() const { return this->name; }
 };

@@ -2,7 +2,7 @@
 
 #include "Component.hpp"
 
-namespace Component::Effect {
+namespace Components::Effect {
 	class EffectDamage : ComponentEffect {
 	public:
 		void Execute(Entity* source, Entity* objective);

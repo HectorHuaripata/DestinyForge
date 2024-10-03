@@ -1,4 +1,5 @@
 #include "BattleManager.hpp"
+#include "GameManager.hpp"
 
 void BattleManager::ExecuteTurn()
 {
@@ -63,7 +64,6 @@ void BattleManager::StartBattle()
 void BattleManager::EndBattle()
 {
     //TODO: Agregar experiencia ganada por cada personaje, ademas de objetos del botin agregados al inventario, y estadisticas si subio de nivel
-
     GM.ChangeGameState(GameState::DUNGEON);
 }
 
@@ -103,11 +103,10 @@ void BattleManager::DefineTurns()
     }
 }
 
-void BattleManager::Action(int attackID, int objective = 0, bool toRival = true)
+void BattleManager::Action(int attackID, int objective, bool toRival)
 {
     //TODO: Implementar un validador para que la id del ataque y el indice del objetivo sean validos
     
-
    /* if (cEntityInTurn->getAttack(attackID)->getTargetType() == TargetRange::SINGLE )
     {
         cEntityInTurn->doAttack(attackID, cEntityInTurn->getTag() == tagEntity::HERO ? enemies[objective] : group[objective]);
@@ -123,5 +122,4 @@ void BattleManager::Action(int attackID, int objective = 0, bool toRival = true)
     else if (cEntityInTurn->getTag() == tagEntity::ENEMY) {
         cEntityInTurn->doAttack(sAttack, group[(cTurn / 4) % 2]);
     }*/
-
 }

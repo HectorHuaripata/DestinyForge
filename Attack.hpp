@@ -38,6 +38,6 @@ public:
 
     /*AttackType GetType() { return type; }
     TargetRange getTargetType() { return range; }
-    TargetObjective getTargetSide() { return objetive; }
-    std::string getName() { return name; }*/
+    TargetObjective getTargetSide() { return objetive; }*/
+    virtual inline const std::string& getName() const = 0;
 };

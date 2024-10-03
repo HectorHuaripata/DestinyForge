@@ -1,19 +1,19 @@
 #include "ComponentsEffect.hpp"
 
-void Component::Effect::EffectDamage::Execute(Entity* source, Entity* objective)
+void Components::Effect::EffectDamage::Execute(Entity* source, Entity* objective)
 {
 	//TODO: Arreglar sistema de ataque
 	//calculateDamage(source, objective, );
 	objective->receiveDamage(damage);
 }
 
-void Component::Effect::EffectDamage::Update(Entity* source){}
+void Components::Effect::EffectDamage::Update(Entity* source){}
 
-void Component::Effect::EffectDamage::onAcquire(Entity* source){}
+void Components::Effect::EffectDamage::onAcquire(Entity* source){}
 
-void Component::Effect::EffectDamage::onRemove(Entity* source){}
+void Components::Effect::EffectDamage::onRemove(Entity* source){}
 
-int Component::Effect::EffectDamage::calculateDamage(Entity* source, Entity* objective, AttackType damageType)
+int Components::Effect::EffectDamage::calculateDamage(Entity* source, Entity* objective, AttackType damageType)
 {
 	switch (damageType)
 	{

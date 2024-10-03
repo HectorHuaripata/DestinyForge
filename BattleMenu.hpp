@@ -2,7 +2,6 @@
 
 #include "Menu.h"
 #include "RoundedRectangle.hpp"
-#include "GameManager.hpp"
 #define BATTLE_MENU_OPTIONS 4
 
 class BattleMenu : public Menu {

@@ -1,7 +1,6 @@
 #include "MainMenu.h"
 
-MainMenu::MainMenu()
-{
+MainMenu::MainMenu() {
 	if (!fntTitle.loadFromFile("Fonts/Gabriola.ttf"))
 		std::cerr << "Error al cargar la fuente" << std::endl;
 

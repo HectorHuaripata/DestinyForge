@@ -34,7 +34,7 @@ void Entity::AddAttack(Attack* newAttack)
     {
         for (int i = 0; i < attack.size(); i++)
         {
-            if (attack[i] == newAttack) alreadyAdded == true;
+            if (attack[i] == newAttack) alreadyAdded = true;
             break;
         }
         if(!alreadyAdded) attack.push_back(newAttack);

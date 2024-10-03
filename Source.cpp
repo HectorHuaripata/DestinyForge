@@ -2,9 +2,7 @@
 #undef main
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include "MainMenu.h"
-#include "InGameMenu.h"
-#include "BattleMenu.hpp"
+#include "GameManager.hpp"
 #include "RoundedRectangle.hpp"
 
 int main() {

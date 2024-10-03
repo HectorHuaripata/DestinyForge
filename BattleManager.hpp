@@ -1,9 +1,11 @@
 #pragma once
 
 #include <vector>
-#include "MainMenu.h"
+#include "AttackDamage.hpp"
 
     //TODO: IMPLEMENTAR CLASE BATTLE MANAGER
+
+enum class BattleState { ACTION, MAGIC, INVENTORY, SELECT_TARGET };
 
 class BattleManager {
 private:
@@ -30,10 +32,12 @@ public:
         enemies.push_back(new Entity(tagEntity::ENEMY, "Huargo", 40, 7, 5, 3, 3, 8, 18, attacks[0], attacks[1], attacks[2], nullptr));
     }
     //El siguiente inicializador se debe cambiar a tomar un archivo serializado y cargar los datos
-    BattleManager(std::vector<Entity*> group, std::vector<Entity> enemies, std::vector<Attack*> attacks):
-        cTurn(0), sAttack(-1), cEntityInTurn(nullptr), bState(BattleState::ACTION){
+    BattleManager(std::vector<Entity*>& group, std::vector<Entity*>& enemies, std::vector<Attack*>& attacks):
+        cTurn(0), sAttack(0), cEntityInTurn(nullptr), bState(BattleState::ACTION){
         //TODO: Agregar una clase extra para las batallas
         this->group = group;
+        this->enemies = enemies;
+        this->attacks = attacks;
     }
 
     void ExecuteTurn();
@@ -41,7 +45,7 @@ public:
     void StartBattle();
     void EndBattle();
     void DefineTurns();
-    void Action(int attackID, int objective = 0, bool toRival);
+    void Action(int attackID = 0, int objective = 0, bool toRival = true);
 
     Entity* getCharacter(int id) {
         if (id < 0 || id >= group.size())
@@ -61,10 +65,10 @@ public:
         return group[id];
     }
 
-    size_t      getGroupSize() { return group.size(); }
-    size_t      getEnemiesSize() { return enemies.size(); }
-    int         getTurn() { return cTurn; }
+    inline const size_t&    getGroupSize() const { return this->group.size(); }
+    inline const size_t&    getEnemiesSize() const { return this->enemies.size(); }
+    inline const int        getTurn() const { return this->cTurn; }
     Entity* getcCharacter() { return cEntityInTurn; }
-    BattleState getBattleState() const { return bState; }
+    inline BattleState getBattleState() { return this->bState; }
 
 };

@@ -1,4 +1,5 @@
 #include "BattleMenu.hpp"
+#include "GameManager.hpp"
 
 BattleMenu::BattleMenu()
 {
@@ -103,7 +104,7 @@ void BattleMenu::isSelected()
 	selector[0].color = sf::Color(0, 127, 255, 255);
 	selector[1].color = sf::Color(0, 127, 255, 255);
 
-	switch (GameManager::getInstance().getBattleState())
+	switch (GM.getBattleState())
 	{
 	case BattleState::ACTION:
 
@@ -120,9 +121,9 @@ void BattleMenu::isSelected()
 		case 2:
 			for (int i = 0; i < BATTLE_MENU_OPTIONS; i++)
 			{
-				if (i < GM.getcCharacter()->getAttacksKnown())
+				if (i < GM.getCCharacter()->getAttacksKnown())
 				{
-					battleMenuOpc[i].setString(GM.getcCharacter()->getAttack(i)->getName());
+					battleMenuOpc[i].setString(GM.getCCharacter()->getAttack(i)->getName());
 				}
 				else battleMenuOpc[i].setString("");
 			}
@@ -142,9 +143,9 @@ void BattleMenu::isSelected()
 		break;
 
 	case BattleState::MAGIC:
-		if (GM.getcCharacter()->getAttack(menuOpcSelected) != nullptr)
+		if (GM.getCCharacter()->getAttack(menuOpcSelected) != nullptr)
 		{
-			std::cout << "Se realizo el ataque " << GM.getcCharacter()->getAttack(menuOpcSelected)->getName() << std::endl;
+			std::cout << "Se realizo el ataque " << GM.getCCharacter()->getAttack(menuOpcSelected)->getName() << std::endl;
 			GM.ChangeBattleState(BattleState::ACTION);
 			//GM.ChangeBattleState(BattleState::SELECT_TARGET);
 		}
