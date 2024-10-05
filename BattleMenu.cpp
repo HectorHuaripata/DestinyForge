@@ -39,6 +39,14 @@ BattleMenu::BattleMenu()
 	battleMenuOpc[3].setFillColor(sf::Color::Black);
 	battleMenuOpc[3].setPosition(20.0f, 545.0f);
 
+	//Entity Name
+	cEntityName.setFont(fntTitle);
+	cEntityName.setString(GM.getCCharacter()->getName() + "'s Turn");
+	cEntityName.setCharacterSize(40);
+	cEntityName.setFillColor(sf::Color::Black);
+	cEntityName.setPosition(20.0f, 20.0f);
+
+
 	//Selector
 	selector = sf::VertexArray(sf::TriangleStrip, 4);
 	// define it as a rectangle, located at (10, 10) and with size 100x100
@@ -59,6 +67,8 @@ BattleMenu::BattleMenu()
 
 void BattleMenu::draw(sf::RenderWindow& rwindow)
 {
+	rwindow.draw(cEntityName);
+
 	baseRectangle.draw(rwindow);
 	rwindow.draw(selector, tSelector);
 	for (int i = 0; i < BATTLE_MENU_OPTIONS; ++i) {

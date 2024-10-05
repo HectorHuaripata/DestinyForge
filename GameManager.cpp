@@ -1,10 +1,9 @@
 #include "GameManager.hpp"
-#include "MainMenu.h"
 
 void GameManager::Initialize(sf::RenderWindow& rwindow)
 {
     bManager = new BattleManager();
-    cMenu = new MainMenu();
+    cMenu = new MainMenu;
     rwindow.setFramerateLimit(60);
 }
 
@@ -29,104 +28,20 @@ void GameManager::Update(sf::RenderWindow& rwindow, sf::Event& ev)
             }
             if (ev.key.code == sf::Keyboard::Return)
             {
-                cMenu->isSelected();
+                Action();
                 break;
             }
         }
-    }
+    }    
 
     // Clear the whole window before rendering a new frame
     rwindow.clear(sf::Color::White);
 
     // Drawing graphics
-
     cMenu->draw(rwindow);
 
     // Display the current frame
     rwindow.display();
-    /*
-    switch (gState)
-    {
-
-    case GameState::BATTLE:
-
-        switch (cMenu->MainMenuPressed())
-        {
-        case 0:
-            if (bState == BattleState::MAGIC)
-            {
-                //Uso de la magia en la pos 0 del cCharacter
-                
-            }
-            else
-            {
-                //Uso del ataque por defecto del cCharacter
-                ExecuteTurn();
-            }
-
-            break;
-        case 1:
-            if (bState == BattleState::MAGIC)
-            {
-                ExecuteTurn();
-                bState = BattleState::ACTION;
-            }
-            else
-            {
-                std::cout << "Aun no hay habilidades" << std::endl;
-            }
-            break;
-        case 2:
-            if (bState == BattleState::MAGIC)
-            {
-                std::cout << "Ese ataque aun no esta disponible" << std::endl;
-                bState = BattleState::ACTION;
-            }
-            else
-            {
-                bState = BattleState::MAGIC;
-            }
-            break;
-        case 3:
-            if (bState == BattleState::MAGIC)
-            {
-                std::cout << "Ese ataque aun no esta disponible" << std::endl;
-                bState = BattleState::ACTION;
-            }
-            else
-            {
-                std::cout << "No tienes objetos." << std::endl;
-            }
-
-            break;
-        default:
-            break;
-        }
-
-
-        //TODO: Encapsular lo siguiente en una funcion
-        if (false) //win conditions
-        {
-            // Finalizar el combate, volver al menú principal, etc.
-            cEntityInTurn = nullptr;
-            //TODO: Limpiar el orden de los turnos
-            cTurn = 0;
-            gState = GameState::DUNGEON;
-            ChangeGameState(GameState::DUNGEON);
-        }
-        else if (false) { //defeat conditions
-
-            //TODO: Limpiar el orden de los turnos
-            // Finalizar el juego, mostrar pantalla de game over, etc.
-            cEntityInTurn = nullptr;
-            cTurn = 0;
-        }
-
-        break;
-
-    default:
-        break;
-    }*/
 }
 
 void GameManager::Quit()
@@ -143,9 +58,13 @@ void GameManager::ChangeGameState(GameState gameState) {
     gState = gameState;
     switch (gState)
     {
+    case GameState::START:
+        cMenu = new MainMenu;
+        break;
+
     case GameState::BATTLE:
-        cMenu = new BattleMenu;
         bManager->StartBattle();
+        cMenu = new BattleMenu;
         break;
 
     case GameState::DUNGEON:
@@ -153,6 +72,12 @@ void GameManager::ChangeGameState(GameState gameState) {
 
     case GameState::WORLD_MAP:
         cMenu = new InGameMenu;
+        break;
+
+    case GameState::DIALOGUE:
+        break;
+
+    case GameState::SHOP:
         break;
 
     default:
@@ -163,4 +88,47 @@ void GameManager::ChangeGameState(GameState gameState) {
 void GameManager::ChangeBattleState(BattleState battleState)
 {
     bManager->ChangeBattleState(battleState);
+}
+
+void GameManager::Action() {
+    switch (gState)
+    {
+    case GameState::START:
+        switch (cMenu->MainMenuPressed())
+        {
+        case 0:
+            ChangeGameState(GameState::BATTLE);
+            break;
+        case 1:
+            std::cout << "No tienes partida guardada." << std::endl;
+            break;
+        case 2:
+            std::cout << "No hay ajustes aun" << std::endl;
+            break;
+        case 3:
+            std::cout << "Aun estoy desarrollando el contenido extra" << std::endl;
+            break;
+
+        default:
+            std::cout << "Informanos como llegaste aqui... por favor" << std::endl;
+            break;
+        }
+        break;
+
+    case GameState::BATTLE:
+        bManager->Action();
+        break;
+
+    case GameState::WORLD_MAP:
+        break;
+
+    case GameState::DUNGEON:
+        break;
+
+    case GameState::DIALOGUE:
+        break;
+
+    case GameState::SHOP:
+        break;
+    }
 }

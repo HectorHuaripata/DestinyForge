@@ -3,6 +3,7 @@
 #include "BattleMenu.hpp"
 #include "BattleManager.hpp"
 #include "InGameMenu.h"
+#include "MainMenu.h"
 
 enum class GameState { START, WORLD_MAP, DUNGEON, BATTLE, DIALOGUE, SHOP };
 
@@ -39,6 +40,7 @@ public:
     void StartMap();
     void ChangeGameState(GameState gameState);
     void ChangeBattleState(BattleState battleState);
+    void Action();
 
     inline const GameState& getGameState() const { return gState; }
     BattleState getBattleState() { return this->bManager->getBattleState(); }

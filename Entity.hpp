@@ -4,8 +4,9 @@
 #endif
 
 #include <algorithm>
-#include "Attack.hpp"
 #include <vector>
+#include "Attack.hpp"
+
 
 #define VECTOR_ATTACKS_SIZE 4
 
@@ -25,24 +26,24 @@ public:
     ~Entity();
 
     void receiveDamage(int);
-    void doAttack(int attackPos, std::vector<Entity*> objective);
+    void doAttack(int attackPos, Entity* objective);
     void AddAttack(Attack* newAttack);
     void RemoveAttack(int id);
 
 
 
     //Getters
-    tagEntity getTag() { return tag; }
-    std::string getName() { return name; }
-    int getCurrentHealth() { return cHealth; }
-    int getMaxHealth() { return mHealth; }
-    int getPhysicAtk() { return pAtk; }
-    int getPhysicDef() { return pDef; }
-    int getMagicAtk() { return mAtk; }
-    int getMagicDef() { return mDef; }
-    int getSpeed() { return speed; }
-    int getMaxMana() { return mMana; }
-    int getCurrentMana() { return cMana; }
-    size_t getAttacksKnown() { return attack.size(); }
-    Attack* getAttack(int i) { return attack[i]; }
+    tagEntity getTag() { return this->tag; }
+    std::string getName() { return this->name; }
+    inline const int getCurrentHealth() const { return this->cHealth; }
+    inline const int getMaxHealth() const { return this->mHealth; }
+    inline const int getPhysicAtk() const { return this->pAtk; }
+    inline const int getPhysicDef() const { return this->pDef; }
+    inline const int getMagicAtk() const { return this->mAtk; }
+    inline const int getMagicDef() const { return this->mDef; }
+    inline const int getSpeed() const { return this->speed; }
+    inline const int getMaxMana() const{ return this->mMana; }
+    inline const int getCurrentMana() const { return this->cMana; }
+    size_t getAttacksKnown() { return this->attack.size(); }
+    Attack* getAttack(int i) { return this->attack[i]; }
 };

@@ -102,23 +102,25 @@ void MainMenu::moveDown()
 
 void MainMenu::isSelected()
 {
-	switch (MainMenuSelected)
-	{
-	case 0:
-		GM.ChangeGameState(GameState::BATTLE);
-		break;
-	case 1:
-		std::cout << "No tienes partida guardada." << std::endl;
-		break;
-	case 2:
-		std::cout << "No hay ajustes aun" << std::endl;
-		break;
-	case 3:
-		std::cout << "Aun estoy desarrollando el contenido extra" << std::endl;
-		break;
+	//switch (MainMenuSelected)
+	//{
+	//case 0:
+	//	//TODO: Encontrar la manera de cambiar el gameState del GM sin llamarlo
+	//	//GM.ChangeGameState(GameState::BATTLE);
+	//	std::cout << "Deberia iniciar el combate..." << std::endl;
+	//	break;
+	//case 1:
+	//	std::cout << "No tienes partida guardada." << std::endl;
+	//	break;
+	//case 2:
+	//	std::cout << "No hay ajustes aun" << std::endl;
+	//	break;
+	//case 3:
+	//	std::cout << "Aun estoy desarrollando el contenido extra" << std::endl;
+	//	break;
 
-	default:
-		std::cout << "Informanos como llegaste aqui... por favor" << std::endl;
-		break;
-	}
+	//default:
+	//	std::cout << "Informanos como llegaste aqui... por favor" << std::endl;
+	//	break;
+	//}
 }

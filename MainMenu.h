@@ -1,6 +1,5 @@
 #pragma once
 #include "Menu.h"
-#include "GameManager.hpp"
 
 #define MAX_MAIN_MENU_OPTIONS 4
 

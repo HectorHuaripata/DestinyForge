@@ -27,6 +27,8 @@ private:
     RoundedRectangle baseRectangle;
     sf::Text battleMenuOpc[BATTLE_MENU_OPTIONS];
 
+    sf::Text cEntityName;
+
     sf::VertexArray selector;
     sf::Transform tSelector;
 };

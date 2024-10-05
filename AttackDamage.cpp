@@ -1,14 +1,15 @@
 #include "AttackDamage.hpp"
 
-AttackDamage::AttackDamage(std::string name, int power, int baseDamage, AttackType attackType, TargetRange range, TargetObjective objTeam) : name(name), power(power), baseDamage(baseDamage), type(attackType), range(range), objectiveTeam(objTeam) {}
+AttackDamage::AttackDamage(std::string name, int power, int cost, AttackType attackType, TargetRange range, TargetObjective objTeam) : name(name), power(power), cost(cost), type(attackType), range(range), objectiveTeam(objTeam) {}
 
 AttackDamage::~AttackDamage() {}
 
-void AttackDamage::Execute(Entity* source, std::vector<Entity*> objective) {
-   /* int damage = 0;
+void AttackDamage::Execute(Entity* source, Entity* objective) {
+    int damage = 0;
+    std::cout << source->getName() << " ataco con " << name << " a " << objective->getName() << std::endl;
     if (type == AttackType::PHYSICAL)
-        damage = power * source->getPhysicAtk() / objective->getPhysicDef() + baseDamage;
+        damage = power * source->getPhysicAtk() / objective->getPhysicDef();
     else if (type == AttackType::MAGIC)
-        damage = power * source->getMagicAtk() / objective->getMagicDef() + baseDamage;
-    objective->receiveDamage(damage);*/
+        damage = power * source->getMagicAtk() / objective->getMagicDef();
+    objective->receiveDamage(damage);
 }

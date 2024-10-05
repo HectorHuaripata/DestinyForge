@@ -20,9 +20,10 @@ Entity::~Entity()
 
 void Entity::receiveDamage(int damage) {
     cHealth = std::clamp(cHealth - damage, 0, cHealth);
+    std::cout << name << " ha recibido " << damage << " de danio." << std::endl;
 }
 
-void Entity::doAttack(int attackPos, std::vector<Entity*> objective)
+void Entity::doAttack(int attackPos, Entity* objective)
 {
     attack[attackPos]->Execute(this, objective);
 }
@@ -37,7 +38,8 @@ void Entity::AddAttack(Attack* newAttack)
             if (attack[i] == newAttack) alreadyAdded = true;
             break;
         }
-        if(!alreadyAdded) attack.push_back(newAttack);
+        if (alreadyAdded) std::cout << "Se agrego el ataque " << newAttack->getName() << std::endl;
+        else attack.push_back(newAttack);
     }
     else  std::cout << "Los ataques ya estan completos" << std::endl;
 }
