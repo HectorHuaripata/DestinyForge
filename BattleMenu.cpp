@@ -109,80 +109,9 @@ void BattleMenu::moveDown()
 	}
 }
 
-void BattleMenu::isSelected()
+void BattleMenu::update()
 {
-	selector[0].color = sf::Color(0, 127, 255, 255);
-	selector[1].color = sf::Color(0, 127, 255, 255);
-
-	switch (GM.getBattleState())
-	{
-	case BattleState::ACTION:
-
-		switch (menuOpcSelected)
-		{
-		case 0:
-			std::cout << "Ataque basico" << std::endl;
-			break;
-
-		case 1:
-			std::cout << "Aun no hemos implementado las habilidades" << std::endl;
-			break;
-
-		case 2:
-			for (int i = 0; i < BATTLE_MENU_OPTIONS; i++)
-			{
-				if (i < GM.getCCharacter()->getAttacksKnown())
-				{
-					battleMenuOpc[i].setString(GM.getCCharacter()->getAttack(i)->getName());
-				}
-				else battleMenuOpc[i].setString("");
-			}
-			GM.ChangeBattleState(BattleState::MAGIC);
-			break;
-
-		case 3:
-			GM.ChangeBattleState(BattleState::INVENTORY);
-			std::cout << "Aun no esta implementado el inventario" << std::endl;
-			GM.ChangeBattleState(BattleState::ACTION);
-			break;
-
-		default:
-			break;
-		}
-
-		break;
-
-	case BattleState::MAGIC:
-		if (GM.getCCharacter()->getAttack(menuOpcSelected) != nullptr)
-		{
-			std::cout << "Se realizo el ataque " << GM.getCCharacter()->getAttack(menuOpcSelected)->getName() << std::endl;
-			GM.ChangeBattleState(BattleState::ACTION);
-			//GM.ChangeBattleState(BattleState::SELECT_TARGET);
-		}
-		else
-		{
-			std::cout << "Ese ataque no es valido" << std::endl;
-			GM.ChangeBattleState(BattleState::ACTION);
-		}		
-		break;
-
-	case BattleState::INVENTORY:
-
-		break;
-
-	case BattleState::SELECT_TARGET:
-		//TODO: Implementar logica de Seleccion de enemigo en la pantalla
-		
-
-		//TODO: Implementar logica para luego 
-		battleMenuOpc[0].setString("Attack");
-		battleMenuOpc[1].setString("Ability");
-		battleMenuOpc[2].setString("Magic");
-		battleMenuOpc[3].setString("Item");
-
-		break;
-	}
-
+	cEntityName.setString(GM.getCCharacter()->getName() + "'s Turn");
 }
 
 BattleMenu::~BattleMenu(){}

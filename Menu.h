@@ -7,6 +7,6 @@
         virtual void draw(sf::RenderWindow& rwindow) = 0;
         virtual void moveUp() = 0;
         virtual void moveDown() = 0;
-        virtual void isSelected() = 0;
+        virtual void update() = 0;
         virtual int MainMenuPressed() = 0;
     };

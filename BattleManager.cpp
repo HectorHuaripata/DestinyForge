@@ -54,6 +54,7 @@ void BattleManager::ExecuteTurn()
     }
 
     cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
+    GM.getCMenu()->update();
     cTurn++;
 }
 
@@ -69,7 +70,7 @@ void BattleManager::StartBattle()
     DefineTurns();
     //TODO: Implementar algoritmo para ordenar los elementos segun su velocidad
     cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
-    cTurn = 0;
+    cTurn = 1;
 }
 
 void BattleManager::EndBattle()

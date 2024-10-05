@@ -100,7 +100,7 @@ void MainMenu::moveDown()
 	}
 }
 
-void MainMenu::isSelected()
+void MainMenu::update()
 {
 	//switch (MainMenuSelected)
 	//{

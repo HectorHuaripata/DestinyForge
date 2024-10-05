@@ -124,7 +124,7 @@ void InGameMenu::moveDown()
 	}
 }
 
-void InGameMenu::isSelected()
+void InGameMenu::update()
 {
 	selector[0].color = sf::Color(0, 127, 255, 255);
 	selector[1].color = sf::Color(0, 127, 255, 255);

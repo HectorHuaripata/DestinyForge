@@ -10,7 +10,7 @@ public:
     void draw(sf::RenderWindow& rwindow);
     void moveUp();
     void moveDown();
-    void isSelected();
+    void update();
 
     int MainMenuPressed() override {
         return MainMenuSelected;
