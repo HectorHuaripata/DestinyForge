@@ -23,6 +23,12 @@ void Entity::receiveDamage(int damage) {
     std::cout << name << " ha recibido " << damage << " de danio." << std::endl;
 }
 
+void Entity::reduceMana(int amount)
+{
+    cMana = std::clamp(cMana - amount, 0, cMana);
+    std::cout << name << " ha consumido " << amount << " de mana." << std::endl;
+}
+
 void Entity::doAttack(int attackPos, Entity* objective)
 {
     attack[attackPos]->Execute(this, objective);

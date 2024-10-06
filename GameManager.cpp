@@ -1,10 +1,9 @@
 #include "GameManager.hpp"
 
-void GameManager::Initialize(sf::RenderWindow& rwindow)
+void GameManager::Initialize()
 {
     bManager = new BattleManager();
     cMenu = new MainMenu;
-    rwindow.setFramerateLimit(60);
 }
 
 void GameManager::Update(sf::RenderWindow& rwindow, sf::Event& ev)

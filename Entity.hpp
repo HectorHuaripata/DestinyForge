@@ -26,6 +26,7 @@ public:
     ~Entity();
 
     void receiveDamage(int);
+    void reduceMana(int n);
     void doAttack(int attackPos, Entity* objective);
     void AddAttack(Attack* newAttack);
     void RemoveAttack(int id);
@@ -44,6 +45,6 @@ public:
     inline const int getSpeed() const { return this->speed; }
     inline const int getMaxMana() const{ return this->mMana; }
     inline const int getCurrentMana() const { return this->cMana; }
-    size_t getAttacksKnown() { return this->attack.size(); }
+    inline const size_t getAttacksKnown() const { return this->attack.size(); }
     Attack* getAttack(int i) { return this->attack[i]; }
 };

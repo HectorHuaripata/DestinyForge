@@ -11,5 +11,6 @@ void AttackDamage::Execute(Entity* source, Entity* objective) {
         damage = power * source->getPhysicAtk() / objective->getPhysicDef();
     else if (type == AttackType::MAGIC)
         damage = power * source->getMagicAtk() / objective->getMagicDef();
+    source->reduceMana(cost);
     objective->receiveDamage(damage);
 }

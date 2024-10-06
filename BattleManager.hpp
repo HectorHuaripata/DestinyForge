@@ -16,9 +16,7 @@ private:
     int cTurn, sAttack;
     Entity* cEntityInTurn;
     BattleState bState;
-public:
-
-    
+public: 
 
     BattleManager();
     //El siguiente inicializador se debe cambiar a tomar un archivo serializado y cargar los datos
@@ -36,6 +34,8 @@ public:
     void EndBattle();
     void DefineTurns();
     void Action();
+    bool WinCondition();
+    bool LoseCondition();
     //TODO: Decidir si los combates son por turnos o por rondas(grupos de turnos)
     //TODO: Implementar Funcion para apilar ataques en un turno
 
@@ -43,6 +43,7 @@ public:
         if (id < 0 || id >= group.size())
         {
             std::cerr << "Index out of bounds.\n";
+            //TODO: Implementar un throw para que envie un error.
             return nullptr;
         }
         return group[id];
@@ -54,7 +55,7 @@ public:
             std::cerr << "Index out of bounds.\n";
             return nullptr;
         }
-        return group[id];
+        return enemies[id];
     }
 
     inline const size_t&    getGroupSize() const { return this->group.size(); }

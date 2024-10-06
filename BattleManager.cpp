@@ -24,16 +24,26 @@ void BattleManager::ExecuteTurn()
     //Los parametros que necesitare: accion(BattleState), idAtaque(), objetivo(Entity* o Vector<>)
     
     // Ejecutar acción seleccionada
-    //TODO:Cambiar el if por un switch
-    if (bState == BattleState::ACTION)
+    switch (bState)
     {
+    case BattleState::ACTION:
         sAttack = 0;
-    }
-    else {
+        break;
+    case BattleState::MAGIC:
         sAttack = GM.getCMenu()->MainMenuPressed();
-        bState = BattleState::ACTION;
+        //bState = BattleState::ACTION;
+        break;
+    case BattleState::INVENTORY:
+        //Abrir Menu inventario batalla
+        break;
+    case BattleState::SELECT_TARGET:
+        //Abrir Menu para seleccionar objetivo
+        break;
+    default:
+        break;
     }
 
+    //TODO:Cambiar el if por un switch
     if (cEntityInTurn->getTag() == tagEntity::HERO) {
         cEntityInTurn->doAttack(sAttack, enemies[0]);
     }
@@ -41,21 +51,27 @@ void BattleManager::ExecuteTurn()
         cEntityInTurn->doAttack(sAttack, group[0]);
     }
 
-    //TODO: Encapsular lo siguiente en una funcion
-    if (false) //win conditions
-    {
-        // Finalizar el combate, volver al menú principal, etc.
-        EndBattle();
-        GM.ChangeGameState(GameState::DUNGEON);
-    }
-    else if (false) { //defeat conditions
-        EndBattle();
-        // Finalizar el juego, mostrar pantalla de game over, etc.        
-    }
+    bState = BattleState::ACTION;
 
-    cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
-    GM.getCMenu()->update();
-    cTurn++;
+    //TODO: Encapsular lo siguiente en una funcion
+    if (WinCondition()) //win conditions
+    {
+        std::cout << "Ganas la batalla." << std::endl;
+        // Finalizar el combate, mostrar recompensas, volver al menú principal, etc.
+        EndBattle();
+        
+    }
+    else if (LoseCondition()) { //defeat conditions
+        std::cout << "Pierdes la batalla." << std::endl;
+        // Finalizar el juego, mostrar pantalla de game over, etc.
+        EndBattle();
+    }
+    else
+    {
+        cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
+        GM.getCMenu()->update();
+        cTurn++;
+    }    
 }
 
 void BattleManager::ChangeBattleState(BattleState battleState)
@@ -65,9 +81,9 @@ void BattleManager::ChangeBattleState(BattleState battleState)
 
 void BattleManager::StartBattle()
 {
-    bState = BattleState::ACTION;
     //TODO: Inicializar el orden de los turnos
     DefineTurns();
+    sAttack = -1;
     //TODO: Implementar algoritmo para ordenar los elementos segun su velocidad
     cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
     cTurn = 1;
@@ -75,12 +91,14 @@ void BattleManager::StartBattle()
 
 void BattleManager::EndBattle()
 {
+
     //TODO: Agregar experiencia ganada por cada personaje, ademas de objetos del botin agregados al inventario, y estadisticas si subio de nivel
     cEntityInTurn = nullptr;
     cTurn = 0;
-    sAttack = 0;
-    //TODO: Limpiar el orden de los turnos
-    GM.ChangeGameState(GameState::DUNGEON);
+    sAttack = -1;
+    //TODO: Limpiar el orden de los turnos, pero solo de los enemigos para que luego no demora en cargar
+    //A menos que el usuario haya modificado su grupo
+    GM.ChangeGameState(GameState::START);
 }
 
 void BattleManager::DefineTurns()
@@ -122,22 +140,7 @@ void BattleManager::DefineTurns()
 void BattleManager::Action()
 {
     //TODO: Implementar un validador para que la id del ataque y el indice del objetivo sean validos
-    
-   /* if (cEntityInTurn->getAttack(attackID)->getTargetType() == TargetRange::SINGLE )
-    {
-        cEntityInTurn->doAttack(attackID, cEntityInTurn->getTag() == tagEntity::HERO ? enemies[objective] : group[objective]);
-    }
 
-    if (cEntityInTurn->getTag() == tagEntity::HERO) {
-        if (false)
-        {
-
-        }
-        cEntityInTurn->doAttack(sAttack, enemies[(cTurn / 4) % 2]);
-    }
-    else if (cEntityInTurn->getTag() == tagEntity::ENEMY) {
-        cEntityInTurn->doAttack(sAttack, group[(cTurn / 4) % 2]);
-    }*/
     switch (bState)
     {
     case BattleState::ACTION:
@@ -147,11 +150,12 @@ void BattleManager::Action()
             //Uso del ataque por defecto del cCharacter
             ExecuteTurn();
             break;
-        case 1:
+        case 1:            
             std::cout << "Aun no hay habilidades" << std::endl;
             break;
         case 2:
             ChangeBattleState(BattleState::MAGIC);
+            GM.getCMenu()->update();
             break;
         case 3:
             ChangeBattleState(BattleState::INVENTORY);
@@ -163,7 +167,14 @@ void BattleManager::Action()
         }
         break;
     case BattleState::MAGIC:
-        //Uso de la magia en la pos 0 del cCharacter
+        if (GM.getCMenu()->MainMenuPressed()<GM.getCCharacter()->getAttacksKnown())
+            ExecuteTurn(); //Uso de la magia en la pos MainMenuPressed del cCharacter
+        else
+        {
+            std::cout << "Opcion no valida." << std::endl;
+            ChangeBattleState(BattleState::ACTION);
+            GM.getCMenu()->update();
+        }
         break;
     case BattleState::INVENTORY:
         //El input aqui vendra de otro menu llamado Battle Inventory Menu
@@ -176,3 +187,24 @@ void BattleManager::Action()
         break;
     }
 }
+
+bool BattleManager::WinCondition()
+{
+    //TODO: OPTIMIZAR. MUUUUUUUY LENTO
+    for (Entity* var : enemies)
+    {
+        if (var->getCurrentHealth() > 0) return false;
+    }
+    return true;
+}
+
+bool BattleManager::LoseCondition()
+{
+    //TODO: OPTIMIZAR. MUUUUUUUY LENTO
+    for (Entity* var : group)
+    {
+        if (var->getCurrentHealth() > 0) return false;
+    }
+    return true;
+}
+

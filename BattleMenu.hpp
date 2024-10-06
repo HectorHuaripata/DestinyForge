@@ -3,6 +3,7 @@
 #include "Menu.h"
 #include "RoundedRectangle.hpp"
 #define BATTLE_MENU_OPTIONS 4
+#define BAR_MAX_SIZE 200
 
 class BattleMenu : public Menu {
 
@@ -26,6 +27,14 @@ private:
 
     RoundedRectangle baseRectangle;
     sf::Text battleMenuOpc[BATTLE_MENU_OPTIONS];
+
+    sf::Text nameMemberGroup;
+    sf::RectangleShape healthBarGroup;
+    sf::RectangleShape manaBarGroup;
+
+    sf::Text nameMemberEnemies;
+    sf::RectangleShape healthBarEnemies;
+    sf::RectangleShape manaBarEnemies;
 
     sf::Text cEntityName;
 

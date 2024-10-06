@@ -30,7 +30,7 @@ public:
     GameManager(GameManager const&) = delete;
     void operator=(GameManager const&) = delete;
 
-    void Initialize(sf::RenderWindow& rwindow); //Carga toda la informacion guardada
+    void Initialize(); //Carga toda la informacion guardada
     void Update(sf::RenderWindow& rwindow, sf::Event& ev);
     void Quit();
 
@@ -46,6 +46,8 @@ public:
     BattleState getBattleState() { return this->bManager->getBattleState(); }
     Menu*       getCMenu() { return this->cMenu; }
     inline Entity* getCCharacter() const { return this->bManager->getcCharacter(); }
+    inline Entity* getGroupMember(int id) const { return this->bManager->getCharacter(id); }
+    inline Entity* getEnemiesMember(int id) const { return this->bManager->getEnemy(id); }
     
     
     

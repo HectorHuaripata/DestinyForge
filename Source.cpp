@@ -11,7 +11,9 @@ int main() {
     
     sf::Event ev;
 
-    GM.Initialize(mainWindow);
+    mainWindow.setFramerateLimit(60);
+
+    GM.Initialize();
 
 
     while (mainWindow.isOpen())
