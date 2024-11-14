@@ -46,7 +46,7 @@ BattleMenu::BattleMenu()
 	nameMemberGroup.setFillColor(sf::Color::Black);
 	nameMemberGroup.setPosition(20.0f, 220.0f);
 
-	//health & mana bars of group
+	//health and mana bars of group
 	healthBarGroup.setSize(sf::Vector2f(BAR_MAX_SIZE, 10.0f));
 	healthBarGroup.setPosition(20.0f, 250.0f);
 	healthBarGroup.setOrigin(0.0f, 5.0f);
@@ -64,7 +64,7 @@ BattleMenu::BattleMenu()
 	nameMemberEnemies.setFillColor(sf::Color::Black);
 	nameMemberEnemies.setPosition(550.0f, 220.0f);
 
-	//health & mana bars of enemies
+	//health and mana bars of enemies
 	healthBarEnemies.setSize(sf::Vector2f(BAR_MAX_SIZE, 10.0f));
 	healthBarEnemies.setPosition(550.0f, 250.0f); 
 	healthBarEnemies.setOrigin(0.0f, 5.0f);
@@ -181,7 +181,8 @@ void BattleMenu::update()
 		for (size_t i = 0; i < BATTLE_MENU_OPTIONS; i++)
 		{
 			if (i < GM.getCCharacter()->getAttacksKnown())
-				battleMenuOpc[i].setString(GM.getCCharacter()->getAttack(i)->getName());
+				//battleMenuOpc[i].setString(GM.getCCharacter()->getAttack(i)->getName());
+				battleMenuOpc[i].setString(GM.getCCharacter()->getAttackName(i));
 			else
 				battleMenuOpc[i].setString("");
 		}

@@ -1,5 +1,5 @@
 #pragma once
-#include "AttackDamage.hpp"
+
 #include "BattleMenu.hpp"
 #include "BattleManager.hpp"
 #include "InGameMenu.h"
@@ -47,8 +47,5 @@ public:
     Menu*       getCMenu() { return this->cMenu; }
     inline Entity* getCCharacter() const { return this->bManager->getcCharacter(); }
     inline Entity* getGroupMember(int id) const { return this->bManager->getCharacter(id); }
-    inline Entity* getEnemiesMember(int id) const { return this->bManager->getEnemy(id); }
-    
-    
-    
+    inline Entity* getEnemiesMember(int id) const { return this->bManager->getEnemy(id); }      
 };

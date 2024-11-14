@@ -139,38 +139,52 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AlteredStates.cpp" />
     <ClCompile Include="AttackDamage.cpp" />
+    <ClCompile Include="AttackState.cpp" />
     <ClCompile Include="BattleManager.cpp" />
     <ClCompile Include="BattleMenu.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="ComponentsEffect.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Component.hpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="InGameMenu.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="MainMenu.h" />
+    <ClCompile Include="MainMenuState.cpp" />
     <ClCompile Include="RoundedRectangle.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="State.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AlteredStates.hpp" />
     <ClInclude Include="Attack.hpp" />
     <ClInclude Include="AttackDamage.hpp" />
+    <ClInclude Include="AttackState.hpp" />
     <ClInclude Include="BattleManager.hpp" />
     <ClInclude Include="BattleMenu.hpp" />
-    <ClInclude Include="ComponentsActivation.hpp" />
+    <ClInclude Include="Button.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="ComponentsEffect.hpp" />
-    <ClInclude Include="ComponentsInteraction.hpp" />
     <ClInclude Include="ComponentsState.hpp" />
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="EntityState.h" />
     <ClInclude Include="EquipRarity.h" />
+    <ClInclude Include="Game.hpp" />
     <ClInclude Include="GameEntity.h" />
     <ClInclude Include="GameManager.hpp" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="InGameMenu.h" />
     <ClInclude Include="MagicAttack.h" />
     <ClInclude Include="MagicType.h" />
+    <ClInclude Include="MainMenuState.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="RoundedRectangle.hpp" />
+    <ClInclude Include="State.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

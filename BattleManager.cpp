@@ -1,14 +1,28 @@
 #include "BattleManager.hpp"
 #include "GameManager.hpp"
 
-BattleManager::BattleManager() :cTurn(0), sAttack(0), cEntityInTurn(nullptr), bState(BattleState::ACTION) {
-    attacks.push_back(new AttackDamage("Ataque fisico", 10, 0, AttackType::PHYSICAL, TargetRange::SINGLE, TargetObjective::RIVAL));
-    attacks.push_back(new AttackDamage("Ataque magico", 15, 5, AttackType::MAGIC, TargetRange::SINGLE, TargetObjective::RIVAL));
 
-    group.push_back(new Entity(tagEntity::HERO, "Hector", 50, 8, 6, 4, 4, 10, 20, attacks[0], attacks[1], nullptr, nullptr));
+BattleManager::BattleManager() :cTurn(0), sAttack(0), cEntityInTurn(nullptr), bState(BattleState::ACTION) {
+    attacks.push_back(new AttackDamage("00001", "Ataque fisico", 10, 0, 0, AttackType::PHYSICAL, TargetRange::SINGLE, 80));
+    attacks.push_back(new AttackDamage("00002", "Ataque magico", 15, 5, 0, AttackType::MAGIC, TargetRange::SINGLE, 90));
+    attacks.push_back(new AttackDamage(
+        "00003",
+        "Nube toxica",
+        10,
+        10,
+        0,
+        AttackType::MAGIC,
+        TargetRange::SINGLE,
+        60));
+
+    group.push_back(new Entity(tagEntity::HERO, "Hector", 50, 8, 6, 4, 4, 10, 20));
+    group.at(0)->AddAttack(attacks[0]);
+    group.at(0)->AddAttack(attacks[1]);
     //group.push_back(new Entity(tagEntity::HERO, "Miguel", 60, 10, 4, 4, 6, 8, 12, attacks[0], attacks[1], attacks[2], nullptr));
 
-    enemies.push_back(new Entity(tagEntity::ENEMY, "Liche", 60, 7, 5, 6, 6, 8, 18, attacks[0], attacks[1], nullptr, nullptr));
+    enemies.push_back(new Entity(tagEntity::ENEMY, "Liche", 40, 3, 6, 3, 3, 8, 24));
+    enemies.at(1)->AddAttack(attacks[0]);
+    enemies.at(1)->AddAttack(attacks[1]);
     //enemies.push_back(new Entity(tagEntity::ENEMY, "Huargo", 40, 7, 5, 3, 3, 8, 18, attacks[0], attacks[1], attacks[2], nullptr));
 }
 
@@ -68,9 +82,7 @@ void BattleManager::ExecuteTurn()
     }
     else
     {
-        cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
-        GM.getCMenu()->update();
-        cTurn++;
+        NextTurn();
     }    
 }
 
@@ -98,6 +110,7 @@ void BattleManager::EndBattle()
     sAttack = -1;
     //TODO: Limpiar el orden de los turnos, pero solo de los enemigos para que luego no demora en cargar
     //A menos que el usuario haya modificado su grupo
+    ordenTurnos.clear();
     GM.ChangeGameState(GameState::START);
 }
 
@@ -114,7 +127,7 @@ void BattleManager::DefineTurns()
                 ordenTurnos.push_back(var);
                 break;
             }
-            else if (ordenTurnos[i]->getSpeed() > var->getSpeed()) {
+            else if (ordenTurnos[i]->getSpeed() < var->getSpeed()) {
                 ordenTurnos.insert(ordenTurnos.begin() + i, var);
                 break;
             }
@@ -129,12 +142,19 @@ void BattleManager::DefineTurns()
                 ordenTurnos.push_back(var);
                 break;
             }
-            else if (ordenTurnos[i]->getSpeed() > var->getSpeed()) {
+            else if (ordenTurnos[i]->getSpeed() < var->getSpeed()) {
                 ordenTurnos.insert(ordenTurnos.begin() + i, var);
                 break;
             }
         }
     }
+}
+
+void BattleManager::NextTurn()
+{
+    cEntityInTurn = ordenTurnos[cTurn % ordenTurnos.size()];
+    GM.getCMenu()->update();
+    cTurn++;
 }
 
 void BattleManager::Action()
@@ -206,5 +226,22 @@ bool BattleManager::LoseCondition()
         if (var->getCurrentHealth() > 0) return false;
     }
     return true;
+}
+
+int BattleManager::calculateDamage(Entity* attacker, Entity* defender, AttackDamage* ability)
+//Calcula el danio de un movimiento tomando en cuenta la fuerza y bonificadores de potencia del atacante, y la defensa, armadura y bonificadores de defensa del atacante
+{
+    int damage = 0;
+    std::cout << attacker->getName() << " ataco con " << ability->getName() << " a " << defender->getName() << std::endl;
+    if (ability->GetType() == AttackType::PHYSICAL)
+        damage = attacker->getPhysicAtk() / defender->getPhysicDef();
+    else if (ability->GetType() == AttackType::MAGIC)
+        damage = attacker->getMagicAtk() / defender->getMagicDef();
+
+        damage *= ability->getPower();
+    //TODO: URGENTE! Mover estas lineas a otra funcion
+    //attacker->reduceMana(ability->getCost());
+    //defender->receiveDamage(damage);
+    return damage;
 }
 

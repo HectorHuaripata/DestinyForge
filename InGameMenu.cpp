@@ -1,6 +1,5 @@
 #include "InGameMenu.h"
 
-
 InGameMenu::InGameMenu()
 {
 	if (!fntTitle.loadFromFile("Fonts/Gabriola.ttf"))

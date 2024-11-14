@@ -1,30 +1,39 @@
 #include "ComponentsEffect.hpp"
 
-void Components::Effect::EffectDamage::Execute(Entity* source, Entity* objective)
+EffectDamage::EffectDamage(int damage): damage(damage)
+{
+	
+}
+
+EffectDamage::~EffectDamage()
+{
+}
+
+void EffectDamage::Execute(Entity* source, Entity* objective)
 {
 	//TODO: Arreglar sistema de ataque
 	//calculateDamage(source, objective, );
 	objective->receiveDamage(damage);
 }
 
-void Components::Effect::EffectDamage::Update(Entity* source){}
+void EffectDamage::Update(Entity* source){}
 
-void Components::Effect::EffectDamage::onAcquire(Entity* source){}
+void EffectDamage::onAcquire(Entity* source){}
 
-void Components::Effect::EffectDamage::onRemove(Entity* source){}
+void EffectDamage::onRemove(Entity* source){}
 
-int Components::Effect::EffectDamage::calculateDamage(Entity* source, Entity* objective, AttackType damageType)
+int EffectDamage::calculateDamage(Entity* source, Entity* objective, AttackType damageType)
 {
 	switch (damageType)
 	{
 	case AttackType::PHYSICAL:
-		damage = source->getPhysicAtk() - objective->getPhysicDef();
+		this->damage = source->getPhysicAtk() - objective->getPhysicDef();
 		break;
 	case AttackType::MAGIC:
-		damage = source->getMagicAtk() - objective->getMagicDef();
+		this->damage = source->getMagicAtk() - objective->getMagicDef();
 		break;
 	case AttackType::STATE:
-		damage = 0;
+		this->damage = 0;
 		break;
 	default:
 		break;

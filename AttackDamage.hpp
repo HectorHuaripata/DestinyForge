@@ -1,29 +1,36 @@
 #pragma once
-#ifndef ATTACK_DAMAGE_HPP
-#define ATTACK_DAMAGE_HPP
-#endif
 
-#include "Entity.hpp"
+#include "Attack.hpp"
+#include <string>
+
+class BattleManager;
 
 class AttackDamage : public Attack {
 private:
-    int power, cost;
+    std::string id, name;
+    unsigned int power, cost, priority, accuracy;
     AttackType type;
     TargetRange range;
-    TargetObjective objectiveTeam;
-    std::string name;
-    /*
-    int accuracy;
-    int priority;*/
+    Component* effect;    
     // ... otros atributos para efectos secundarios, condiciones especiales, etc.
 public:
-    AttackDamage(std::string name, int power, int cost, AttackType attackType, TargetRange range, TargetObjective objTeam);
+    AttackDamage(std::string id, std::string name, unsigned int power, unsigned int cost, unsigned int priority, AttackType type, TargetRange range, unsigned int accuracy);
     ~AttackDamage();
-    void Execute(Entity* source, Entity* objective);
-    inline const AttackType& GetType() const { return this->type; }
-    TargetRange getTargetType() { return this->range; }
-    TargetObjective  getTargetSide() { return this->objectiveTeam; }
-    //inline const int getCost() const { return this->cost; }
+
+    //void CalculateDamage(Entity* source, Entity* objective);
+    //void ApplyEffects(std::vector<Entity*> objective); //Aplica efectos como veneno, inmunidad, etc
+    //bool itFails(); //Cuando un ataque tiene probabilidades de fallar
+    void Execute(Entity* source, Entity* objective, BattleManager* bm);
+
+    //Getters and Setters
     inline const std::string& getName() const { return this->name; }
+    inline const std::string& getId() const { return this->id; }
+    inline AttackType GetType() { return this->type; }
+    inline TargetRange getTargetType() { return this->range; }
+    inline const unsigned int getPriority() const { return this->priority; }
+    inline const unsigned int getCost() const { return this->cost; }
+
+    inline const unsigned int getPower() const { return this->power; }
+    
     
 };
