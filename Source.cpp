@@ -1,6 +1,5 @@
 #undef main
 
-#include <SDL.h>
 #include "Game.hpp"
 
 int main() {

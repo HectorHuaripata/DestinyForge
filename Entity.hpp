@@ -2,8 +2,8 @@
 
 #include <algorithm>
 #include <vector>
-#include <string>
 #include "Attack.hpp"
+#include <string>
 
 #define VECTOR_ATTACKS_SIZE 4
 

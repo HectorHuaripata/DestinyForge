@@ -1,5 +1,6 @@
+#pragma once
+
 #include "Attack.hpp"
-#include "AlteredStates.hpp"
 
 class AttackState : public Attack {
 private:
@@ -9,13 +10,12 @@ private:
 
 	AttackType type;
 	TargetRange range;
-	AlteredState altState;
 
 public:
-	AttackState(std::string name, std::string id, int cost, float probability, TargetRange range, AlteredState aState, unsigned int priority):name(name), id(id), cost(cost), probability(probability), type(AttackType::STATE), range(range), altState(aState), priority(priority) {}
+	AttackState(std::string name, std::string id, int cost, float probability, TargetRange range, unsigned int priority):name(name), id(id), cost(cost), probability(probability), type(AttackType::STATE), range(range), priority(priority) {}
 	~AttackState();
 
-	void Execute(Entity* source, Entity* objective, BattleManager* bm);
+	void Execute(Entity* source, Entity* objective);
 
 	inline const std::string& getName() const { return this->name; }
 	inline const std::string& getId() const { return this->id; }

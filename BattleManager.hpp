@@ -1,12 +1,12 @@
 #pragma once
 
-#include "Attack.hpp"
+#include "Entity.hpp"
+#include "AttackState.hpp"
 #include "AttackDamage.hpp"
 
-#include "ComponentsEffect.hpp"
-#include "AlteredStates.hpp"
-
 #include <vector>
+
+class Attack;
 
 enum class BattleState { ACTION, MAGIC, INVENTORY, SELECT_TARGET };
 
@@ -48,7 +48,6 @@ public:
     void Action();
     bool WinCondition();
     bool LoseCondition();
-    int calculateDamage(Entity* attacker, Entity* defender, AttackDamage* ability);
     //TODO: Decidir si los combates son por turnos o por rondas(grupos de turnos)
     //TODO: Implementar Funcion para apilar ataques en un turno
 

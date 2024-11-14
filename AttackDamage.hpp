@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Attack.hpp"
-#include <string>
 
 class BattleManager;
 
@@ -10,8 +9,7 @@ private:
     std::string id, name;
     unsigned int power, cost, priority, accuracy;
     AttackType type;
-    TargetRange range;
-    Component* effect;    
+    TargetRange range;   
     // ... otros atributos para efectos secundarios, condiciones especiales, etc.
 public:
     AttackDamage(std::string id, std::string name, unsigned int power, unsigned int cost, unsigned int priority, AttackType type, TargetRange range, unsigned int accuracy);
@@ -20,7 +18,7 @@ public:
     //void CalculateDamage(Entity* source, Entity* objective);
     //void ApplyEffects(std::vector<Entity*> objective); //Aplica efectos como veneno, inmunidad, etc
     //bool itFails(); //Cuando un ataque tiene probabilidades de fallar
-    void Execute(Entity* source, Entity* objective, BattleManager* bm);
+    void Execute(Entity* source, Entity* objective);
 
     //Getters and Setters
     inline const std::string& getName() const { return this->name; }

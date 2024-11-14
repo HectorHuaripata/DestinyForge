@@ -3,7 +3,7 @@
 
 
 BattleManager::BattleManager() :cTurn(0), sAttack(0), cEntityInTurn(nullptr), bState(BattleState::ACTION) {
-    attacks.push_back(new AttackDamage("00001", "Ataque fisico", 10, 0, 0, AttackType::PHYSICAL, TargetRange::SINGLE, 80));
+    /*attacks.push_back(new AttackDamage("00001", "Ataque fisico", 10, 0, 0, AttackType::PHYSICAL, TargetRange::SINGLE, 80));
     attacks.push_back(new AttackDamage("00002", "Ataque magico", 15, 5, 0, AttackType::MAGIC, TargetRange::SINGLE, 90));
     attacks.push_back(new AttackDamage(
         "00003",
@@ -13,7 +13,7 @@ BattleManager::BattleManager() :cTurn(0), sAttack(0), cEntityInTurn(nullptr), bS
         0,
         AttackType::MAGIC,
         TargetRange::SINGLE,
-        60));
+        60));*/
 
     group.push_back(new Entity(tagEntity::HERO, "Hector", 50, 8, 6, 4, 4, 10, 20));
     group.at(0)->AddAttack(attacks[0]);
@@ -227,21 +227,3 @@ bool BattleManager::LoseCondition()
     }
     return true;
 }
-
-int BattleManager::calculateDamage(Entity* attacker, Entity* defender, AttackDamage* ability)
-//Calcula el danio de un movimiento tomando en cuenta la fuerza y bonificadores de potencia del atacante, y la defensa, armadura y bonificadores de defensa del atacante
-{
-    int damage = 0;
-    std::cout << attacker->getName() << " ataco con " << ability->getName() << " a " << defender->getName() << std::endl;
-    if (ability->GetType() == AttackType::PHYSICAL)
-        damage = attacker->getPhysicAtk() / defender->getPhysicDef();
-    else if (ability->GetType() == AttackType::MAGIC)
-        damage = attacker->getMagicAtk() / defender->getMagicDef();
-
-        damage *= ability->getPower();
-    //TODO: URGENTE! Mover estas lineas a otra funcion
-    //attacker->reduceMana(ability->getCost());
-    //defender->receiveDamage(damage);
-    return damage;
-}
-

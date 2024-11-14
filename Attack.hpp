@@ -1,9 +1,6 @@
 #pragma once
 
-#include "Component.hpp"
-#include "BattleManager.hpp"
 #include <iostream>
-#include <vector>
 #include <string>
 
 class Entity;
@@ -14,7 +11,7 @@ class Attack {
 public:
 
     // ... otros métodos (ejecutar, calcularDaño, aplicarEfectos, etc.)
-    virtual void Execute(Entity* source, Entity* objective, BattleManager* bm) = 0; //Ejecuta el ataque en general, usando las otras funciones
+    virtual void Execute(Entity* source, Entity* objective) = 0; //Ejecuta el ataque en general, usando las otras funciones
     
     /*TargetObjective getTargetSide() { return objetive; }*/
     

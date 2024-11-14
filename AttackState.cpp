@@ -4,7 +4,7 @@ AttackState::~AttackState()
 {
 }
 
-void AttackState::Execute(Entity* source, Entity* objective, BattleManager* bm)
+void AttackState::Execute(Entity* source, Entity* objective)
 {
 	
 }
